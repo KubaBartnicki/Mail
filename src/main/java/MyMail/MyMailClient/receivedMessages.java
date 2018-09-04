@@ -11,7 +11,7 @@ import javax.mail.Store;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class receivedMessages {
+public class ReceivedMessages {
 	private MyData profile;
 	private SimpleStringProperty title;
 	private SimpleStringProperty date;
@@ -20,7 +20,7 @@ public class receivedMessages {
 	private Object textOfMessage;
 	
 	@SuppressWarnings("deprecation")
-	public receivedMessages (MyData existProfile, int i) {
+	public ReceivedMessages (MyData existProfile, int i) {
         try {
         	profile = existProfile;            
             Properties props = new Properties();

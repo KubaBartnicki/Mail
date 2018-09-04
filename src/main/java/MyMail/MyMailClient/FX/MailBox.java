@@ -7,7 +7,7 @@ import javax.mail.BodyPart;
 import javax.mail.Multipart;
 
 import MyMail.MyMailClient.MyData;
-import MyMail.MyMailClient.receivedMessages;
+import MyMail.MyMailClient.ReceivedMessages;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,27 +63,27 @@ public class MailBox extends Application {
             final ComboBox<Integer> cb = new ComboBox<>(FXCollections.observableArrayList(5, 10 , 15, 20));
             cb.setValue(5);
             
-            final TableView<receivedMessages> messagesTable = new TableView<receivedMessages>();
-            final ObservableList<receivedMessages> titleList = FXCollections.observableArrayList();
-            final ObservableList<receivedMessages> toList = FXCollections.observableArrayList();
-            final ObservableList<receivedMessages> dateList = FXCollections.observableArrayList();
-            final ObservableList<receivedMessages> fromList = FXCollections.observableArrayList();
+            final TableView<ReceivedMessages> messagesTable = new TableView<ReceivedMessages>();
+            final ObservableList<ReceivedMessages> titleList = FXCollections.observableArrayList();
+            final ObservableList<ReceivedMessages> toList = FXCollections.observableArrayList();
+            final ObservableList<ReceivedMessages> dateList = FXCollections.observableArrayList();
+            final ObservableList<ReceivedMessages> fromList = FXCollections.observableArrayList();
             
             TableColumn from = new TableColumn("From");
             from.setPrefWidth(100);
-            from.setCellValueFactory(new PropertyValueFactory<receivedMessages, String>("From"));
+            from.setCellValueFactory(new PropertyValueFactory<ReceivedMessages, String>("From"));
             
             TableColumn date = new TableColumn("Date");
             date.setPrefWidth(100);
-            date.setCellValueFactory(new PropertyValueFactory<receivedMessages, String>("Date"));
+            date.setCellValueFactory(new PropertyValueFactory<ReceivedMessages, String>("Date"));
             
             TableColumn to = new TableColumn("To");
             to.setPrefWidth(100);
-            to.setCellValueFactory(new PropertyValueFactory<receivedMessages, String>("To"));
+            to.setCellValueFactory(new PropertyValueFactory<ReceivedMessages, String>("To"));
             
             TableColumn title = new TableColumn("Title");
             title.setPrefWidth(500);
-            title.setCellValueFactory(new PropertyValueFactory<receivedMessages, String>("Title"));
+            title.setCellValueFactory(new PropertyValueFactory<ReceivedMessages, String>("Title"));
             
             messagesTable.setPrefSize(600, 300);
             final TextArea mesText = new TextArea();
@@ -104,12 +104,12 @@ public class MailBox extends Application {
 					messagesTable.getSelectionModel().getSelectedIndex();
 					mesText.clear();
 					
-					if(new receivedMessages(existProfile, messagesTable.getSelectionModel().getSelectedIndex()).getTextOfMessage() instanceof String) {
-						mesText.setText((String) new receivedMessages(existProfile, messagesTable.getSelectionModel().getSelectedIndex()).getTextOfMessage());
+					if(new ReceivedMessages(existProfile, messagesTable.getSelectionModel().getSelectedIndex()).getTextOfMessage() instanceof String) {
+						mesText.setText((String) new ReceivedMessages(existProfile, messagesTable.getSelectionModel().getSelectedIndex()).getTextOfMessage());
 					}
-					else if (new receivedMessages(existProfile, messagesTable.getSelectionModel().getSelectedIndex()).getTextOfMessage() instanceof Multipart) {
+					else if (new ReceivedMessages(existProfile, messagesTable.getSelectionModel().getSelectedIndex()).getTextOfMessage() instanceof Multipart) {
 						try {
-				        Multipart multipart = (Multipart) new receivedMessages(existProfile, messagesTable.getSelectionModel().getSelectedIndex()).getTextOfMessage();
+				        Multipart multipart = (Multipart) new ReceivedMessages(existProfile, messagesTable.getSelectionModel().getSelectedIndex()).getTextOfMessage();
 				        BodyPart part = multipart.getBodyPart(0);
 				        mesText.setText(part.getContent().toString());
 						}catch(Exception e) {
@@ -124,9 +124,9 @@ public class MailBox extends Application {
 			});
             
             for(int i = 0;i<cb.getValue();i++) {
-            	dateList.add(new receivedMessages(existProfile, i));
-            	fromList.add(new receivedMessages(existProfile, i));
-            	titleList.add(new receivedMessages(existProfile, i));
+            	dateList.add(new ReceivedMessages(existProfile, i));
+            	fromList.add(new ReceivedMessages(existProfile, i));
+            	titleList.add(new ReceivedMessages(existProfile, i));
             } 
 
             final Button addButton = new Button("Odswiez");
@@ -137,9 +137,9 @@ public class MailBox extends Application {
                 	fromList.clear();
                 	titleList.clear();
                     for(int i = 0;i<cb.getValue();i++) {
-	                    dateList.add(new receivedMessages(existProfile, i));
-	                	fromList.add(new receivedMessages(existProfile, i));
-	                	titleList.add(new receivedMessages(existProfile, i));
+	                    dateList.add(new ReceivedMessages(existProfile, i));
+	                	fromList.add(new ReceivedMessages(existProfile, i));
+	                	titleList.add(new ReceivedMessages(existProfile, i));
                     }
 
                 }
